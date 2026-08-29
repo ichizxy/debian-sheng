@@ -78,6 +78,19 @@ When you trigger the **Build RootFS** workflow via `workflow_dispatch`, the foll
 > - If you choose **Kernel source = `custom_build`**, you **must** provide the **Kernel Repo URL**, **Kernel Branch**, and **Kernel Config** fields.  
 ---
 
+## About Some Packages...
+
+| Package | Description |
+|---------|-------------|
+| [xiaomi-mipps-auth](https://github.com/ianchb/xiaomi-mipps-auth) | Automatically negotiates MIPPS when a charger is connected, enabling fast charging up to 120 W and providing charging notifications. |
+| [xiaomi-charger-mode](https://github.com/ianchb/xiaomi-charger-mode) | Shows a simple charging screen and prevents a full system boot when a charger is connected while the device is powered off. |
+| [xiaomi-sheng-thp](https://github.com/ianchb/xiaomi-sheng-thp) | Processes touch data for finger input and stylus support. |
+| [xiaomi-pen-status](https://github.com/ianchb/xiaomi-pen-status) | Shows stylus connection and battery status, and automatically attempts the initial Bluetooth connection. |
+| [xiaomi-sheng-fingerprint](https://github.com/ianchb/xiaomi-sheng-fingerprint) | Provides TEE-based fingerprint reader support, including patches for `libfprint` and `fprintd`. |
+| [xiaomi-sheng-keyboard-helper](https://github.com/ianchb/xiaomi-sheng-keyboard-helper) | Supports the microphone indicator on the official keyboard and disables keyboard input based on the hinge angle. |
+
+---
+
 ## Flashing to Your Device
 
 ### Prerequisites
