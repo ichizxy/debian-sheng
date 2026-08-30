@@ -24,11 +24,18 @@ jobs:
         run: |
           git clone --depth 1 https://github.com/fortime/fcitx5-osk.git
           python3 - <<'PYEOF'
-          p = 'fcitx5-osk/fcitx5-osk/src/state/config.rs'
-          s = open(p, encoding='utf-8').read()
-          s = s.replace('\r\n', '\n')
-          repl = [
-            # field names
+          import pathlib
+          def patch(p, repl):
+              p = pathlib.Path(p)
+              s = p.read_text(encoding='utf-8').replace('\r\n', '\n')
+              for a, b in repl:
+                  if a not in s:
+                      raise SystemExit('MISS in ' + str(p) + ': ' + repr(a))
+                  s = s.replace(a, b)
+              p.write_text(s, encoding='utf-8')
+              print('patched', p)
+          # field names (state/config.rs)
+          patch('fcitx5-osk/fcitx5-osk/src/state/config.rs', [
             ('name: "Width",', 'name: "瀹藉害",'),
             ('name: "Placement",', 'name: "鏀剧疆鏂瑰紡",'),
             ('name: "Indicator Display",', 'name: "鎸囩ず鏍忔樉绀?,'),
@@ -41,22 +48,18 @@ jobs:
             ('name: "Light Theme",', 'name: "浜壊涓婚",'),
             ('name: "Preferred Output",', 'name: "棣栭€夎緭鍑?,'),
             ('name: "Preferred Output(Custom)",', 'name: "棣栭€夎緭鍑?鑷畾涔?",'),
-            # Placement
+          ])
+          # enums (config.rs)
+          patch('fcitx5-osk/fcitx5-osk/src/config.rs', [
             ('    #[default]\n    Dock,\n', '    #[default]\n    #[strum(serialize = "鍋滈潬")]\n    Dock,\n'),
             ('    Float,\n', '    #[strum(serialize = "娴獥")]\n    Float,\n'),
-            # IndicatorDisplay
             ('    #[default]\n    Auto,\n', '    #[default]\n    #[strum(serialize = "鑷姩")]\n    Auto,\n'),
             ('    AlwaysOn,\n', '    #[strum(serialize = "濮嬬粓鏄剧ず")]\n    AlwaysOn,\n'),
             ('    AlwaysOff,\n', '    #[strum(serialize = "濮嬬粓闅愯棌")]\n    AlwaysOff,\n'),
-            # QuickActionBarState
             ('    #[default]\n    Off,\n', '    #[default]\n    #[strum(serialize = "鍏抽棴")]\n    Off,\n'),
             ('    On,\n', '    #[strum(serialize = "寮€鍚?)]\n    On,\n'),
             ('    Toggle,\n', '    #[strum(serialize = "鍒囨崲")]\n    Toggle,\n'),
-          ]
-          for a, b in repl:
-              assert a in s, 'MISS: ' + a
-              s = s.replace(a, b)
-          open(p, 'w', encoding='utf-8').write(s)
+          ])
           print('zh patch applied OK')
           PYEOF
 
