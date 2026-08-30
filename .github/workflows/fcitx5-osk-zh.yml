@@ -36,29 +36,29 @@ jobs:
               print('patched', p)
           # field names (state/config.rs)
           patch('fcitx5-osk/fcitx5-osk/src/state/config.rs', [
-            ('name: "Width",', 'name: "瀹藉害",'),
-            ('name: "Placement",', 'name: "鏀剧疆鏂瑰紡",'),
-            ('name: "Indicator Display",', 'name: "鎸囩ず鏍忔樉绀?,'),
-            ('name: "Manual Mode",', 'name: "鎵嬪姩妯″紡",'),
-            ('name: "Manual Mode(Session)",', 'name: "鎵嬪姩妯″紡(浼氳瘽)",'),
-            ('name: "Ignore Fcitx Show",', 'name: "蹇界暐 Fcitx 鏄剧ず",'),
-            ('name: "Quick Action Bar",', 'name: "蹇嵎鎿嶄綔鏍?,'),
-            ('name: "Custom Actions",', 'name: "鑷畾涔夋搷浣?,'),
-            ('name: "Dark Theme",', 'name: "鏆楄壊涓婚",'),
-            ('name: "Light Theme",', 'name: "浜壊涓婚",'),
-            ('name: "Preferred Output",', 'name: "棣栭€夎緭鍑?,'),
-            ('name: "Preferred Output(Custom)",', 'name: "棣栭€夎緭鍑?鑷畾涔?",'),
+            ('name: "Width",', 'name: "\u5bbd\u5ea6",'),
+            ('name: "Placement",', 'name: "\u653e\u7f6e\u65b9\u5f0f",'),
+            ('name: "Indicator Display",', 'name: "\u6307\u793a\u680f\u663e\u793a",'),
+            ('name: "Manual Mode",', 'name: "\u624b\u52a8\u6a21\u5f0f",'),
+            ('name: "Manual Mode(Session)",', 'name: "\u624b\u52a8\u6a21\u5f0f(\u4f1a\u8bdd)",'),
+            ('name: "Ignore Fcitx Show",', 'name: "\u5ffd\u7565 Fcitx \u663e\u793a",'),
+            ('name: "Quick Action Bar",', 'name: "\u5feb\u6377\u64cd\u4f5c\u680f",'),
+            ('name: "Custom Actions",', 'name: "\u81ea\u5b9a\u4e49\u64cd\u4f5c",'),
+            ('name: "Dark Theme",', 'name: "\u6697\u8272\u4e3b\u9898",'),
+            ('name: "Light Theme",', 'name: "\u4eae\u8272\u4e3b\u9898",'),
+            ('name: "Preferred Output",', 'name: "\u9996\u9009\u8f93\u51fa",'),
+            ('name: "Preferred Output(Custom)",', 'name: "\u9996\u9009\u8f93\u51fa(\u81ea\u5b9a\u4e49)",'),
           ])
           # enums (config.rs)
           patch('fcitx5-osk/fcitx5-osk/src/config.rs', [
-            ('    #[default]\n    Dock,\n', '    #[default]\n    #[strum(serialize = "鍋滈潬")]\n    Dock,\n'),
-            ('    Float,\n', '    #[strum(serialize = "娴獥")]\n    Float,\n'),
-            ('    #[default]\n    Auto,\n', '    #[default]\n    #[strum(serialize = "鑷姩")]\n    Auto,\n'),
-            ('    AlwaysOn,\n', '    #[strum(serialize = "濮嬬粓鏄剧ず")]\n    AlwaysOn,\n'),
-            ('    AlwaysOff,\n', '    #[strum(serialize = "濮嬬粓闅愯棌")]\n    AlwaysOff,\n'),
-            ('    #[default]\n    Off,\n', '    #[default]\n    #[strum(serialize = "鍏抽棴")]\n    Off,\n'),
-            ('    On,\n', '    #[strum(serialize = "寮€鍚?)]\n    On,\n'),
-            ('    Toggle,\n', '    #[strum(serialize = "鍒囨崲")]\n    Toggle,\n'),
+            ('    #[default]\n    Dock,\n', '    #[default]\n    #[strum(serialize = "\u505c\u9760")]\n    Dock,\n'),
+            ('    Float,\n', '    #[strum(serialize = "\u6d6e\u7a97")]\n    Float,\n'),
+            ('    #[default]\n    Auto,\n', '    #[default]\n    #[strum(serialize = "\u81ea\u52a8")]\n    Auto,\n'),
+            ('    AlwaysOn,\n', '    #[strum(serialize = "\u59cb\u7ec8\u663e\u793a")]\n    AlwaysOn,\n'),
+            ('    AlwaysOff,\n', '    #[strum(serialize = "\u59cb\u7ec8\u9690\u85cf")]\n    AlwaysOff,\n'),
+            ('    #[default]\n    Off,\n', '    #[default]\n    #[strum(serialize = "\u5173\u95ed")]\n    Off,\n'),
+            ('    On,\n', '    #[strum(serialize = "\u5f00\u542f")]\n    On,\n'),
+            ('    Toggle,\n', '    #[strum(serialize = "\u5207\u6362")]\n    Toggle,\n'),
           ])
           print('zh patch applied OK')
           PYEOF
