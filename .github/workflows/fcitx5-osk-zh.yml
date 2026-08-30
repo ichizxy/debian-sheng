@@ -26,6 +26,7 @@ jobs:
           python3 - <<'PYEOF'
           p = 'fcitx5-osk/fcitx5-osk/src/state/config.rs'
           s = open(p, encoding='utf-8').read()
+          s = s.replace('\r\n', '\n')
           repl = [
             # field names
             ('name: "Width",', 'name: "瀹藉害",'),
