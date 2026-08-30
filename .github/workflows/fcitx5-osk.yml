@@ -26,8 +26,8 @@ jobs:
           cd fcitx5-osk
           cmake -B build -S . -DCMAKE_BUILD_TYPE=Release
           cmake --build build -j$(nproc)
-          cmake --install build --prefix install-dir --component Fcitx5Osk
-          cmake --install build --prefix install-dir --component Fcitx5OskKwinLauncher
+          sudo cmake --install build --prefix install-dir --component Fcitx5Osk
+          sudo cmake --install build --prefix install-dir --component Fcitx5OskKwinLauncher
 
       - name: Package
         run: |
