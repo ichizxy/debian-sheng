@@ -1,0 +1,23 @@
+name: Fetch NerdFonts Symbols Only
+
+on:
+  workflow_dispatch:
+
+jobs:
+  fetch:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Download NerdFonts Symbols Only from GitHub releases
+        run: |
+          curl -sL -o NerdFontsSymbolsOnly.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v3.5.1/NerdFontsSymbolsOnly.zip
+          ls -la NerdFontsSymbolsOnly.zip
+          unzip -o NerdFontsSymbolsOnly.zip -d symbols
+          find symbols -name '*.ttf' -o -name '*.otf' | head -10
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nerd-symbols
+          path: |
+            NerdFontsSymbolsOnly.zip
+            symbols/**/*.ttf
+          retention-days: 7
