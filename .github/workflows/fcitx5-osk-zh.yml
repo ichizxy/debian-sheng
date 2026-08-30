@@ -1,4 +1,4 @@
-name: Build Fcitx5-Osk (arm64)
+name: Build Fcitx5-Osk (arm64, zh_CN)
 
 on:
   workflow_dispatch:
