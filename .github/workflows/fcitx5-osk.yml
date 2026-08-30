@@ -1,0 +1,42 @@
+name: Build Fcitx5-Osk (arm64)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install system deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake pkg-config libssl-dev libudev-dev libxkbcommon-dev libwayland-dev wayland-protocols
+
+      - name: Clone fcitx5-osk and build
+        run: |
+          git clone --depth 1 https://github.com/fortime/fcitx5-osk.git
+          cd fcitx5-osk
+          cmake -B build -S . -DCMAKE_BUILD_TYPE=Release
+          cmake --build build -j$(nproc)
+          cmake --install build --prefix install-dir --component Fcitx5Osk
+          cmake --install build --prefix install-dir --component Fcitx5OskKwinLauncher
+
+      - name: Package
+        run: |
+          cd fcitx5-osk/install-dir
+          tar czf ../../fcitx5-osk-arm64.tar.gz .
+          find . -type f | head -50
+          du -sh .
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: fcitx5-osk-arm64
+          path: fcitx5-osk-arm64.tar.gz
+          retention-days: 7
